@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          # Install compiler, make and CUnit (used by the project's tests)
+          sudo apt-get install -y clang build-essential libcunit1-dev
+
+      - name: Ensure objects dir exists
+        run: mkdir -p objects
+
+      - name: Build tests
+        run: make test test_base
+
+      - name: Run threaded tests
+        run: |
+          if [ -x ./test ]; then
+            ./test
+          else
+            echo "test binary not found or not executable"; exit 1
+          fi
+
+      - name: Run sequential tests
+        run: |
+          if [ -x ./test_base ]; then
+            ./test_base
+          else
+            echo "test_base binary not found or not executable"; exit 1
+          fi
