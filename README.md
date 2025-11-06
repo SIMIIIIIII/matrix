@@ -1,7 +1,7 @@
 ## Projet Matrix 
 
 Ce projet consiste à réaliser des opérations sur les matrices et vecteurs.
-Nous avons le version sequentielle et la version concurrente disponible, les tests pour le 2 version peuvent être executés,
+J'ai la version sequentielle et la version concurrente disponible, les tests pour le 2 version peuvent être executés,
 mais seule la version concurrente est executable avec l'executable main.
 
 ## Lancer le programme
